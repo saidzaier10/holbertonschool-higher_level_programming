@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+
 def new_in_list(my_list, idx, element):
     """
     Replace an element in a list at a specific index and return a new list.
@@ -21,6 +22,7 @@ def new_in_list(my_list, idx, element):
     # Replace the element at the specified index in the copy of the list
     new_list[idx] = element
     return new_list
+
 
 # Test the function
 if __name__ == "__main__":
