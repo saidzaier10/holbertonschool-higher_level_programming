@@ -90,7 +90,10 @@ class Square:
 
 
 """
-This is the end of the code. The 'Square' class provides functionality to create and manipulate square objects.
-It includes methods to calculate the area of the square and print the square using the '#' character.
-The class also includes getter and setter methods for the 'size' and 'position' attributes.
+This is the end of the code. The 'Square' class provides functionality 
+to create and manipulate square objects.
+It includes methods to calculate the area 
+of the square and print the square using the '#' character.
+The class also includes getter and setter methods for 
+the 'size' and 'position' attributes.
 """
