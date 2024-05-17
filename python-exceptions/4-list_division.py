@@ -5,18 +5,21 @@ def list_division(my_list_1, my_list_2, list_length):
     new_list = []
     for i in range(list_length):
         try:
+            # Try to perform the division
             result = my_list_1[i] / my_list_2[i]
+        except IndexError:
+            # If any list is too short
+            print("out of range")
+            result = 0
+        except TypeError:
+            # If any element is not a number
+            print("wrong type")
+            result = 0
         except ZeroDivisionError:
+            # If there's a division by zero
             print("division by 0")
             result = 0
-        except (TypeError, IndexError):
-            if isinstance(my_list_1[i], (int, float)) and isinstance(
-                my_list_2[i], (int, float)
-            ):
-                print("out of range")
-            else:
-                print("wrong type")
-            result = 0
         finally:
+            # Append the result to the new list regardless of the exception
             new_list.append(result)
     return new_list
