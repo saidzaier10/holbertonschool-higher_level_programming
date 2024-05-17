@@ -23,9 +23,9 @@ class Square:
             position (tuple): The position of a square. Defaults to (0, 0).
 
         Raises:
-            TypeError: If size is not an integer or 
+            TypeError: If size is not an integer or
             position is not a tuple of 2 positive integers.
-            ValueError: If size is less than 0 or 
+            ValueError: If size is less than 0 or
             position contains negative integers.
         """
         self.size = size  # Use the setter to validate the size
@@ -92,10 +92,10 @@ class Square:
 
 
 """
-This is the end of the code. The 'Square' class provides functionality 
+This is the end of the code. The 'Square' class provides functionality
 to create and manipulate square objects.
-It includes methods to calculate the area 
+It includes methods to calculate the area
 of the square and print the square using the '#' character.
-The class also includes getter and setter methods for 
+The class also includes getter and setter methods for
 the 'size' and 'position' attributes.
 """
