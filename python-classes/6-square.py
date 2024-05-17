@@ -26,8 +26,8 @@ class Square:
             TypeError: If size is not an integer or position is not a tuple of 2 positive integers.
             ValueError: If size is less than 0 or position contains negative integers.
         """
-        self.__size = size
-        self.__position = position
+        self.size = size  # Use the setter to validate the size
+        self.position = position  # Use the setter to validate the position
 
     @property
     def size(self):
@@ -39,7 +39,6 @@ class Square:
         """Check exception type and value for size"""
         if not isinstance(value, int):
             raise TypeError("size must be an integer")
-
         if value < 0:
             raise ValueError("size must be >= 0")
         self.__size = value
@@ -76,12 +75,22 @@ class Square:
         """
         if self.__size == 0:
             print()
-        else:
-            for i in range(self.__position[1]):
-                print()
-            for i in range(self.__size):
-                for j in range(self.__position[0]):
-                    print(" ", end="")
-                for j in range(self.__size):
-                    print("#", end="")
-                print()
+            return
+
+        # Print the new lines for the y-coordinate of the position
+        for i in range(self.__position[1]):
+            print()
+
+        # Print the square
+        for i in range(self.__size):
+            # Print spaces for the x-coordinate of the position
+            print(" " * self.__position[0], end="")
+            # Print the # characters for the size of the square
+            print("#" * self.__size)
+
+
+"""
+This is the end of the code. The 'Square' class provides functionality to create and manipulate square objects.
+It includes methods to calculate the area of the square and print the square using the '#' character.
+The class also includes getter and setter methods for the 'size' and 'position' attributes.
+"""
