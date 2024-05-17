@@ -23,8 +23,10 @@ class Square:
             position (tuple): The position of a square. Defaults to (0, 0).
 
         Raises:
-            TypeError: If size is not an integer or position is not a tuple of 2 positive integers.
-            ValueError: If size is less than 0 or position contains negative integers.
+            TypeError: If size is not an integer or 
+            position is not a tuple of 2 positive integers.
+            ValueError: If size is less than 0 or 
+            position contains negative integers.
         """
         self.size = size  # Use the setter to validate the size
         self.position = position  # Use the setter to validate the position
