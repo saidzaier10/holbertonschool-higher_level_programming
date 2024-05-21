@@ -1,5 +1,6 @@
 >>> from 3-say_my_name import say_my_name
 
+# Normal cases
 >>> say_my_name("John", "Smith")
 My name is John Smith
 
@@ -9,12 +10,42 @@ My name is Walter White
 >>> say_my_name("Bob")
 My name is Bob 
 
+# TypeError when first_name is not a string
 >>> say_my_name(12, "White")
 Traceback (most recent call last):
   ...
 TypeError: first_name must be a string
 
+# TypeError when last_name is not a string
 >>> say_my_name("John", 123)
 Traceback (most recent call last):
   ...
 TypeError: last_name must be a string
+
+# Both names as empty strings
+>>> say_my_name("", "")
+My name is  
+
+# First name as empty string
+>>> say_my_name("", "Smith")
+My name is  Smith
+
+# Last name as empty string
+>>> say_my_name("John", "")
+My name is John 
+
+# First name with whitespace
+>>> say_my_name("  ", "Smith")
+My name is    Smith
+
+# Last name with whitespace
+>>> say_my_name("John", "   ")
+My name is John    
+
+# First name with special characters
+>>> say_my_name("@!#", "Smith")
+My name is @!# Smith
+
+# Last name with special characters
+>>> say_my_name("John", "@!#")
+My name is John @!#
