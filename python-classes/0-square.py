@@ -6,6 +6,7 @@ This module defines a Square class.
 
 
 class Square:
+    pass
     """
     This is a class that represents a square.
 
@@ -15,5 +16,3 @@ class Square:
     Methods:
         None
     """
-
-    pass
