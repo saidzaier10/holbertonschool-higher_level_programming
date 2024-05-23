@@ -11,14 +11,14 @@ Importing the function say_my_name.
     >>> say_my_name = __import__('3-say_my_name').say_my_name
 
 Passing first_name and last_name correctly.
-    >>> say_my_name("James", "JRZ")
-    My name is James JRZ
+    >>> say_my_name("Said", "ZAIER")
+    My name is Said ZAIER
 
-    >> say_my_name("jmsjrz")
-    My name is jmsjrz
+    >> say_my_name("Said ZAIER")
+    My name is Said ZAIER
 
 Passing last_name as None.
-    >>> say_my_name("James", None)
+    >>> say_my_name("Said", None)
     Traceback (most recent call last):
         ...
     TypeError: last_name must be a string
@@ -30,13 +30,13 @@ Passing first_name and last_name as None.
     TypeError: first_name must be a string
 
 Passing first name as None.
-    >>> say_my_name(None, "jmsjrz")
+    >>> say_my_name(None, "Said ZAIER")
     Traceback (most recent call last):
         ...
     TypeError: first_name must be a string
 
 Passing wrong types as first_name and last_name
-    >>> say_my_name(1, "jmsjrz")
+    >>> say_my_name(1, "Said ZAIER")
     Traceback (most recent call last):
         ...
     TypeError: first_name must be a string
@@ -47,7 +47,7 @@ Passing wrong types as first_name and last_name
     TypeError: last_name must be a string
 
 Passing more than two arguments to say_my_name().
-    >>> say_my_name("Jim", "jmsjrz", "Gray") #doctest: +ELLIPSIS
+    >>> say_my_name("Jim", "Said ZAIER", "Gray") #doctest: +ELLIPSIS
     Traceback (most recent call last):
         ...
     TypeError: say_my_name() takes from 1 to 2 positional arguments but ...
