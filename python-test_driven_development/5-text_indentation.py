@@ -18,11 +18,11 @@ def text_indentation(text):
         TypeError: If text is not of type str.
     """
 
-    delim = ".?:"
-
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    text = (delim + "\n\n").join([line.strip(" ") for line in text.split(delim)])
+    for delim in ".:?":
+        text = (delim + "\n\n").join(
+            [line.strip(" ") for line in text.split(delim)])
 
     print(text, end="")
