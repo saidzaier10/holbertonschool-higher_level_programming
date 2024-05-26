@@ -15,3 +15,7 @@ class Dog(Animal):
 class Cat(Animal):
     def sound(self):
         return "Meow"
+
+        def shape_info(shape):
+            print("Area:", shape.area())
+            print("Perimeter:", shape.perimeter())
