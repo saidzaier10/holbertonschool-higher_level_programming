@@ -1,38 +1,33 @@
 #!/usr/bin/python3
-"""Student class."""
-
-import json
+"""
+Defines the Student class with public instance attributes and a method
+to retrieve a dictionary representation.
+"""
 
 
 class Student:
-    """Student class."""
+    """
+    Represents a student with a first name, last name, and age.
+    """
 
     def __init__(self, first_name, last_name, age):
-        """Initialize a new Student instance."""
+        """
+        Initializes a new Student instance.
+
+        Args:
+            first_name (str): The student's first name.
+            last_name (str): The student's last name.
+            age (int): The student's age.
+        """
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self):
-        """Return the dictionary representation of a Student instance."""
+        """
+        Returns a dictionary representation of the Student instance.
+
+        Returns:
+            dict: A dictionary with the student's attributes.
+        """
         return self.__dict__
-
-    def to_json_string(self):
-        """Return the JSON string representation of a Student instance."""
-        return json.dumps(self.to_json())
-
-    @staticmethod
-    def from_json_string(json_string):
-        """Return a Student instance from a JSON string."""
-        return Student(**json.loads(json_string))
-
-    def save_to_file(self):
-        """Save a Student instance to a file as JSON."""
-        with open("{}.json".format(self.first_name), mode="w", encoding="utf-8") as file:
-            file.write(self.to_json_string())
-
-    @staticmethod
-    def load_from_file(filename):
-        """Load a Student instance from a file."""
-        with open(filename, mode="r", encoding="utf-8") as file:
-            return Student.from_json_string(file.read())
