@@ -4,6 +4,6 @@
 import json
 
 
-def class_to_json(obj):
-    """Convert a class to a JSON string."""
-    return obj.__dict__
+def load_from_json_file(filename):
+    with open(filename, "r", encoding="utf-8") as file:
+        return json.load(file)
