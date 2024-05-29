@@ -41,12 +41,12 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             }
             self.wfile.write(json.dumps(info_data).encode())
         else:
-            self.send_error(404, "Endpoint not found")
+            self.send_error(404, "not found")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     port = 8000
-    server_address = ('', port)
+    server_address = ("", port)
     httpd = HTTPServer(server_address, SimpleHTTPRequestHandler)
-    print(f'Starting httpd server on port {port}')
+    print(f"Starting httpd server on port {port}")
     httpd.serve_forever()
