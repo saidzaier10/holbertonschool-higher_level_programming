@@ -41,7 +41,11 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             }
             self.wfile.write(json.dumps(info_data).encode())
         else:
-            self.send_error(404, "not found")
+            self.send_response(404)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            error_message = {"error": "Endpoint not found"}
+            self.wfile.write(json.dumps(error_message).encode())
 
 
 if __name__ == "__main__":
@@ -50,3 +54,4 @@ if __name__ == "__main__":
     httpd = HTTPServer(server_address, SimpleHTTPRequestHandler)
     print(f"Starting httpd server on port {port}")
     httpd.serve_forever()
+# Run the server and test the endpoints using curl:
