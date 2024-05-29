@@ -21,33 +21,18 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_header("Content-type", "text/plain")
             self.end_headers()
             self.wfile.write(b"Hello, this is a simple API!")
-        elif self.path == '/data':
+        elif self.path == '/posts':
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            data = {"name": "John", "age": 30, "city": "New York"}
-            self.wfile.write(json.dumps(data).encode())
-        elif self.path == '/status':
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            status = {"status": "OK"}
-            self.wfile.write(json.dumps(status).encode())
+            posts = [
+                {"id": 1, "title": "Post 1", "body": "This is the first post."},
+                {"id": 2, "title": "Post 2", "body": "This is the second post."},
+                {"id": 3, "title": "Post 3", "body": "This is the third post."}
+            ]
+            self.wfile.write(json.dumps(posts).encode())
         else:
             self.send_response(404)
-            self.send_header("Content-type", "application/json")
+            self.send_header("Content-type", "text/plain")
             self.end_headers()
-            error_message = {"error": "Endpoint not found"}
-            self.wfile.write(json.dumps(error_message).encode())
-
-
-def run(server_class=http.server.HTTPServer, handler_class=SimpleHTTPRequestHandler):
-    """
-    Run the HTTP server.
-
-    This function creates an instance of the HTTP server and starts it on the specified port.
-    """
-    server_address = ('', PORT)
-    httpd = server_class(server_address, handler_class)
-    print(f"Starting httpd server on port {PORT}")
-    httpd.serve_forever()
+            self.wfile.write(b"404 Not Found")
