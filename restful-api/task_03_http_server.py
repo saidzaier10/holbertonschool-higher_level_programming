@@ -1,39 +1,44 @@
 #!/usr/bin/python3
 
 import http.server
-import socketserver
 import json
 
-PORT = 8000
 
+class MyRequestHandler(http.server.BaseHTTPRequestHandler):
 
-class MyHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
+        # Handle GET requests
         if self.path == '/':
+            # Respond to root path with a simple text message
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(b'Hello, this is a simple API!')
+            self.wfile.write(b"Hello, this is a simple API!")
         elif self.path == '/data':
-            data = {"name": "John", "age": 30, "city": "New York"}
+            # Respond to /data path with JSON data
+            data = {'name': 'John', 'age': 30, 'city': 'New York'}
+            json_data = json.dumps(data).encode('utf-8')
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            self.wfile.write(json.dumps(data).encode())
+            self.wfile.write(json_data)
         elif self.path == '/status':
+            # Respond to /status path with a simple message
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(b'OK')
+            self.wfile.write(b"OK")
         else:
-            self.send_response(404)
-            self.send_header('Content-type', 'text/plain')
-            self.end_headers()
-            self.wfile.write(b'Endpoint not found')
+            # Handle undefined endpoints with a 404 error
+            self.send_error(404, 'Endpoint not found')
 
 
-Handler = MyHandler
-
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print("serving at port", PORT)
+def run(server_class=http.server.HTTPServer, handler_class=MyRequestHandler, port=8000):
+    server_address = ('', port)
+    httpd = server_class(server_address, handler_class)
+    print(f'Starting server on port {port}')
     httpd.serve_forever()
+
+
+if __name__ == '__main__':
+    run()
