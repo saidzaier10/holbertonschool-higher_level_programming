@@ -5,34 +5,48 @@ import json
 
 
 class MyRequestHandler(http.server.BaseHTTPRequestHandler):
+    def root(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/plain')
+        self.end_headers()
+        self.wfile.write(b"Hello, this is a simple API!")
+
+    def data(self):
+        data = {'name': 'John', 'age': 30, 'city': 'New York'}
+        json_data = json.dumps(data).encode('utf-8')
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json_data)
+
+    def status(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/plain')
+        self.end_headers()
+        self.wfile.write(b"OK")
 
     def do_GET(self):
-        # Handle GET requests
-        if self.path == '/':
-            # Respond to root path with a simple text message
-            self.send_response(200)
-            self.send_header('Content-type', 'text/plain')
-            self.end_headers()
-            self.wfile.write(b"Hello, this is a simple API!")
-        elif self.path == '/data':
-            # Respond to /data path with JSON data
-            data = {'name': 'John', 'age': 30, 'city': 'New York'}
-            json_data = json.dumps(data).encode('utf-8')
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json_data)
-        elif self.path == '/status':
-            # Respond to /status path with a simple message
-            self.send_response(200)
-            self.send_header('Content-type', 'text/plain')
-            self.end_headers()
-            self.wfile.write(b"OK")
+        path_function_map = {
+            '/': self.root,
+            '/data': self.data,
+            '/status': self.status,
+        }
+
+        func = path_function_map.get(self.path, self.send_error)
+        if func == self.send_error:
+            func(404, 'Endpoint not found')
         else:
-            # Handle undefined endpoints with a 404 error
-            self.send_error(404, 'Endpoint not found')
+            func()
 
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length']) # Gets the size of data
+        post_data = self.rfile.read(content_length) # Gets the data itself
+        print(post_data) # Prints the data to the console
 
+        self.send_response(200) # Sends a 200 OK response
+        self.end_headers()
+        self.wfile.write(b'POST request received') # Sends a message back to the client
+        
 def run(server_class=http.server.HTTPServer, handler_class=MyRequestHandler, port=8000):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
