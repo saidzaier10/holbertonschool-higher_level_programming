@@ -25,11 +25,18 @@ class MyRequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"OK")
 
+    def info(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/plain")
+        self.end_headers()
+        self.wfile.write(json.dumps({"version": "1.0", "description": "A simple API built with http.server"}).encode())
+
     def do_GET(self):
         path_function_map = {
             "/": self.root,
             "/data": self.data,
             "/status": self.status,
+            "/info": self.info,
         }
 
         func = path_function_map.get(self.path, self.send_error)
